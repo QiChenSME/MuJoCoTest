@@ -1,0 +1,81 @@
+<mujoco model="wafer stage">
+  <compiler angle="radian"/>
+
+  <option integrator="RK4"/>
+
+  <default>
+    <geom type="mesh"/>
+  </default>
+
+  <asset>
+    <texture type="2d" name="grid" builtin="checker" rgb1="0.1 0.2 0.3" rgb2="0.2 0.3 0.4" width="300" height="300"/>
+    <material name="grid" texture="grid" texrepeat="8 8" reflectance="0.2"/>
+    <mesh name="stage" vertex="-0.0375 0.194856 0 0.0375 0.194856 0 -0.1875 -0.0649519 0 0.1875 -0.0649519 0 -0.15 -0.129904 0 0.15 -0.129904 0 -0.0375 0.194856 0.02 0.0375 0.194856 0.02 -0.1875 -0.0649519 0.02 0.1875 -0.0649519 0.02 -0.15 -0.129904 0.02 0.15 -0.129904 0.02"/>
+  </asset>
+
+  <worldbody>
+    <geom size="1 1 0.1" type="plane" material="grid"/>
+    <camera name="closeup" pos="0 -0.1 0.07" quat="0.850651 0.525731 0 0"/>
+    <light pos="0 0 2" dir="0 0 -1"/>
+    <body name="stage" pos="0 0 0.3">
+      <joint type="free" limited="false" actuatorfrclimited="false"/>
+      <geom mass="7" rgba="1 1 1 0.5" mesh="stage"/>
+      <geom name="mirror_body" size="0.09 0.09 0.025" pos="0 0 -0.025" type="box" mass="0" rgba="0 0.6 1 0.3"/>
+      <geom name="act_restrict_z1" size="0.001" pos="0 0 -0.25" type="sphere" friction="0 0 0" mass="0" rgba="1 1 0 1"/>
+      <geom name="act_restrict_z2" size="0.001" pos="0 0 0.25" type="sphere" friction="0 0 0" mass="0" rgba="1 1 0 1"/>
+      <geom name="act_restrict_y1" size="0.001" pos="0 1.5 0" type="sphere" friction="0 0 0" mass="0" rgba="1 1 0 1"/>
+      <geom name="act_restrict_y2" size="0.001" pos="0 -1.5 0" type="sphere" friction="0 0 0" mass="0" rgba="1 1 0 1"/>
+      <site name="act_o" pos="0 -0.0974279 0" rgba="1 0 0 1"/>
+      <site name="act_p" pos="-0.084375 0.0487139 0" rgba="0 1 0 1"/>
+      <site name="act_q" pos="0.084375 0.0487139 0" rgba="0 0 1 1"/>
+      <site name="center" pos="0 0 0" rgba="0 0 0 1"/>
+    </body>
+    <body name="restriction" pos="0 0 0.3">
+      <geom name="restriction_x1_max" size="0.016 0.041 0.005" pos="0.036 0 -0.25" quat="0.707107 0 0.707107 0" type="box" friction="0 0 0" mass="1" rgba="1 0 0 0"/>
+      <geom name="restriction_x1_min" size="0.016 0.041 0.005" pos="-0.036 0 -0.25" quat="0.707107 0 0.707107 0" type="box" friction="0 0 0" mass="1" rgba="0 1 1 0"/>
+      <geom name="restriction_y1_max" size="0.041 0.016 0.005" pos="0 0.036 -0.25" quat="0.707107 0.707107 0 0" type="box" friction="0 0 0" mass="1" rgba="0 1 0 0"/>
+      <geom name="restriction_y1_min" size="0.041 0.016 0.005" pos="0 -0.036 -0.25" quat="0.707107 0.707107 0 0" type="box" friction="0 0 0" mass="1" rgba="1 0 1 0"/>
+      <geom name="restriction_z1_max" size="0.041 0.041 0.005" pos="0 0 -0.239" type="box" friction="0 0 0" mass="1" rgba="0 0 1 0"/>
+      <geom name="restriction_z1_min" size="0.041 0.041 0.005" pos="0 0 -0.261" type="box" friction="0 0 0" mass="1" rgba="1 1 0 0"/>
+      <geom name="restriction_x2_max" size="0.016 0.041 0.005" pos="0.036 0 0.25" quat="0.707107 0 0.707107 0" type="box" friction="0 0 0" mass="1" rgba="1 0 0 0"/>
+      <geom name="restriction_x2_min" size="0.016 0.041 0.005" pos="-0.036 0 0.25" quat="0.707107 0 0.707107 0" type="box" friction="0 0 0" mass="1" rgba="0 1 1 0"/>
+      <geom name="restriction_y2_max" size="0.041 0.016 0.005" pos="0 0.036 0.25" quat="0.707107 0.707107 0 0" type="box" friction="0 0 0" mass="1" rgba="0 1 0 0"/>
+      <geom name="restriction_y2_min" size="0.041 0.016 0.005" pos="0 -0.036 0.25" quat="0.707107 0.707107 0 0" type="box" friction="0 0 0" mass="1" rgba="1 0 1 0"/>
+      <geom name="restriction_z2_max" size="0.041 0.041 0.005" pos="0 0 0.261" type="box" friction="0 0 0" mass="1" rgba="0 0 1 0"/>
+      <geom name="restriction_z2_min" size="0.041 0.041 0.005" pos="0 0 0.239" type="box" friction="0 0 0" mass="1" rgba="1 1 0 0"/>
+      <geom name="restriction_x3_max" size="0.24 0.205 0.05" pos="0.161236 1.38611 0" quat="0.707107 0 0.707107 0" type="box" friction="0 0 0" mass="1" rgba="1 0 0 0"/>
+      <geom name="restriction_x3_min" size="0.24 0.205 0.05" pos="-0.161236 1.38611 0" quat="0.707107 0 0.707107 0" type="box" friction="0 0 0" mass="1" rgba="0 1 1 0"/>
+      <geom name="restriction_x4_max" size="0.24 0.205 0.05" pos="0.161236 -1.38611 0" quat="0.707107 0 0.707107 0" type="box" friction="0 0 0" mass="1" rgba="1 0 0 0"/>
+      <geom name="restriction_x4_min" size="0.24 0.205 0.05" pos="-0.161236 -1.38611 0" quat="0.707107 0 0.707107 0" type="box" friction="0 0 0" mass="1" rgba="0 1 1 0"/>
+    </body>
+    <body name="sensor" pos="0 0 0.3">
+      <site name="sensor_z1" pos="0.02 0.02 -0.1" type="capsule" rgba="1 0 0 1"/>
+      <site name="sensor_z2" pos="0.02 -0.02 -0.1" type="capsule" rgba="0 1 0 1"/>
+      <site name="sensor_z3" pos="-0.02 0.02 -0.1" type="capsule" rgba="0 0 1 1"/>
+      <site name="sensor_x1" pos="-0.15 -0.02 -0.025" quat="0.707107 0 0.707107 0" type="capsule" rgba="1 0 0 1"/>
+      <site name="sensor_x2" pos="-0.15 0.02 -0.025" quat="0.707107 0 0.707107 0" type="capsule" rgba="0 1 0 1"/>
+      <site name="sensor_y" pos="0 -0.15 -0.025" quat="0.707107 -0.707107 0 0" type="capsule" rgba="0 0 1 1"/>
+    </body>
+  </worldbody>
+
+  <actuator>
+    <general name="v_1" site="act_o" forcerange="0 1" gear="0 0 1 0 0 0"/>
+    <general name="v_2" site="act_p" forcerange="0 1" gear="0 0 1 0 0 0"/>
+    <general name="v_3" site="act_q" forcerange="0 1" gear="0 0 1 0 0 0"/>
+    <general name="h_1" site="act_o" forcerange="-1 1"/>
+    <general name="h_2" site="act_p" forcerange="-1 1" gear="-0.5 -0.866 0 0 0 0"/>
+    <general name="h_3" site="act_q" forcerange="-1 1" gear="-0.5 0.866 0 0 0 0"/>
+    <general name="total" site="center" forcerange="0 1" gear="0 0 68.6 0 0 0"/>
+  </actuator>
+
+  <sensor>
+    <rangefinder site="sensor_z1" name="sensor_z1"/>
+    <rangefinder site="sensor_z2" name="sensor_z2"/>
+    <rangefinder site="sensor_z3" name="sensor_z3"/>
+    <rangefinder site="sensor_x1" name="sensor_x1"/>
+    <rangefinder site="sensor_x2" name="sensor_x2"/>
+    <rangefinder site="sensor_y" name="sensor_y"/>
+    <gyro site="center" name="body_gyro"/>
+    <accelerometer site="center" name="body_linacc"/>
+  </sensor>
+</mujoco>
